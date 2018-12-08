@@ -153,6 +153,9 @@
 @section('script')
     <script>
         $(document).ready(function () {
+            $('.data').bootstrapMaterialDatePicker({
+                weekStart:0, time: false
+            });
             $('#li_home').removeClass('active');
             $('#li_funcionario').addClass('active');
             $('#a_funcionario').trigger('click');
