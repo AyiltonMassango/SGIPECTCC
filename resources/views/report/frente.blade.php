@@ -8,7 +8,7 @@
         <h6 class="txt-center p-m"><strong>{{$provinciaEscola}}-Moçambique</strong></h6>
     </div>
     <div style="width: 24%; display: inline-block; padding-left: 15px">
-        <img src="{{public_path().'/schools/'.$escola->pasta.'/'.$inscricao->foto_aluno}}" height="100">
+        <img src="{{public_path().$inscricao->pasta.'/'.$inscricao->foto_aluno}}" height="100">
     </div>
 </div>
 <div class="linha3">

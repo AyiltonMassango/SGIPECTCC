@@ -21,20 +21,16 @@ class EscolaController extends Controller{
         return view('escola.create');
     }
 
-    private function clean($string){//remocao de character iniciais
-        $string = str_replace(' ','',$string);
-        return strtolower(preg_replace('/[^A-Za-z0-9-]/','',$string));
-    }
-
     public function store(Request $request){
 
-        $dir = $this->clean($request->nome);//pasta da escola
+        $dir = HomeController::clean(($request->nome));//pasta da escola
         $pasta = '/schools/'.$dir;
 
         if(is_dir(public_path().$pasta)){
             echo 'error';
         }else {
-            mkdir(public_path() . $pasta);
+            mkdir(public_path().$pasta);
+            mkdir(public_path().$pasta.'/inscricoes');
 
             $enderecoController = new EnderecoController();
             $enderecoID = $enderecoController->store2($request); //salva enderecoo e retorna seu id;
@@ -77,13 +73,14 @@ class EscolaController extends Controller{
         return response()->json(array('dados' => $distritos));
     }
 
-    public function getCategoriaCarta(){
+    public static function getCategoriaCarta($escola_id){
         $categorias = ClasseEscola::query()
             ->join('escolas','classe_escolas.escola_id','=','escolas.id')
             ->join('categoria_cartas','classe_escolas.cartacateg_id','=','categoria_cartas.id')
-            ->where('escolas.id',$_POST['escola_id'])
+            ->where('escolas.id',$escola_id)
             ->where('classe_escolas.estado','=',1)
-            ->select('categoria_cartas.designacao as cat','classe_escolas.preco as price','categoria_cartas.id as idd')->get();
-        return response()->json(array('dados' => $categorias));
+            ->select('categoria_cartas.designacao','classe_escolas.preco','categoria_cartas.id')->get();
+//        return response()->json(array('dados' => $categorias));
+        return $categorias;
     }
 }

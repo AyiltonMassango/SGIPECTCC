@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Aluno;
+use App\Contacto;
 use App\Provincia;
 use Illuminate\Http\Request;
 
@@ -32,10 +33,11 @@ class AlunoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
+    public static function store(Request $request){
         $tipoDocumetoId = TipoDocumentoController::store($request)->id;
+        $endereco_id = EnderecoController::salvar($request)->id;
 
-        $aluno =Aluno::query()->create([
+        $aluno = Aluno::query()->create([
             'apelido'=>$request->apelido,
             'nome'=>$request->nome,
             'data_nascimento'=>$request->data_nascimento,
@@ -48,10 +50,15 @@ class AlunoController extends Controller
             'nivel_academico'=>$request->nivel_academico,
             'nome_pai'=>$request->nome_pai,
             'nome_mae'=>$request->nome_mae,
-            'endereco_id'=>$request->endereco_id,
+            'endereco_id'=>$endereco_id,
             'tipo_documento_id'=>$tipoDocumetoId,
         ]);
-        echo $aluno->id;
+        Contacto::query()->create(['nr_telefone'=>$request->nr_telefone, 'nr_alternativo'=>$request->nr_alternativo,
+            'email'=>$request->email,
+            'aluno_id'=>$aluno->id,
+        ]);
+
+        return $aluno;
     }
 
     /**

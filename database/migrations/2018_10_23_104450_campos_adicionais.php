@@ -23,8 +23,8 @@ class CamposAdicionais extends Migration
 //            //
 //        });
 
-        Schema::table('escolas',function (Blueprint $table){
-           $table->string('pasta')->after('slogan');
+        Schema::table('inscricaos',function (Blueprint $table){
+           $table->longText('pasta')->after('historico');
         });
     }
 

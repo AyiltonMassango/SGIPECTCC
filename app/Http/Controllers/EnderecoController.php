@@ -41,7 +41,7 @@ class EnderecoController extends Controller
         return $this->salvar($request)->id;
     }
 
-    private function salvar(Request $request){
+    public static function salvar(Request $request){
         $endereco = Endereco::query()->create(['bairro' => $request->bairro,
             'quarteirao' => $request->quarteirao, 'avenida_rua' => $request->avenida_rua,
             'nr_casa' => $request->nr_casa, 'distrito_id' => $request->distrito_id

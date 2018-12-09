@@ -16,5 +16,6 @@ class Inscricao extends Model{
         'aluno_id',
         'escola_id',
         'estado_pagamento',
+        'pasta'
     ];
 }

@@ -42,7 +42,6 @@ class ContactoController extends Controller
             'email'=>$request->email,
             'aluno_id'=>$request->aluno_id,
         ]);
-        echo 'cjade';
     }
 
     /**

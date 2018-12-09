@@ -40,3 +40,13 @@ Route::group(['prefix'=>'escola'], function (){
 
 Route::post('/read_theme','HomeController@read_theme');
 Route::post('/write_theme','HomeController@write_theme');
+
+//Inscricao
+Route::post('/salvarPhoto','InscricaoController@salvarPhoto');
+Route::post('/salvarInscricao','InscricaoController@store');
+
+
+Route::get('/streamPDF','InscricaoController@streamPDF')->name('streamPDF');
+
+Route::get('/teste', function (){
+});
