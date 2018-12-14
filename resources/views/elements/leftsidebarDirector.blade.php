@@ -36,19 +36,19 @@
             </li>
 
             <li id="li_inscicao">
-                <a href="javascript:void(0);" class="menu-toggle">
+                <a id="a_inscricao" href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">mode_edit</i>
                     <span>Inscrições</span>
                 </a>
                 <ul class="ml-menu">
                     <li id="a_add_inscricao">
-                        <a id="" href="{{url('inscricao/create')}}">
+                        <a href="{{url('inscricao/create')}}">
                             <i class="material-icons">person_add</i>
                             <span>Cadastrar</span>
                         </a>
                     </li>
-                    <li>
-                        <a id="a_list_inscricao" href="">
+                    <li id="a_list_inscricao">
+                        <a href="{{url('inscricao')}}">
                             <i class="material-icons">list</i>
                             <span>Listar</span>
                         </a>

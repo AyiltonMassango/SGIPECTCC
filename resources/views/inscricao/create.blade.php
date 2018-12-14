@@ -444,6 +444,8 @@
 
             $('#li_home').removeClass('active');
             $('#li_inscicao').addClass('active');
+            $('#a_inscricao').trigger('click');
+            $('#a_add_inscricao').addClass('active');
 
             $('#selectProvincia').on('change',function () {
                 $.ajax({

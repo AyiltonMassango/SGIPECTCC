@@ -30,7 +30,10 @@ Route::get('/funcionario', 'FuncionarioController@create');
 Route::get('/funcionario/create', 'FuncionarioController@create');
 Route::get('/funcionario/store', 'FuncionarioController@store');
 
-Route::get('/inscricao/create', 'InscricaoController@create');
+Route::group(['prefix'=>'inscricao'], function () {
+    Route::get('/', 'InscricaoController@index');
+    Route::get('/create', 'InscricaoController@create');
+});
 //rotas das escolas
 Route::group(['prefix'=>'escola'], function (){
     Route::get('/', 'EscolaController@index');

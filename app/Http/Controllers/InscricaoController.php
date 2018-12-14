@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\App;
 class InscricaoController extends Controller{
 
     public function index(){
-        //
+        return view('inscricao.index');
     }
 
     public function create(){
