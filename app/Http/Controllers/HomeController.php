@@ -14,10 +14,10 @@ class HomeController extends Controller{
     }
 
     public function index(){
-        return view('home',['funcionario'=>self::getFuncionario()]);
+        return view('home',['funcionario'=>self::getFuncionarioActivo()]);
     }
 
-    public static function getFuncionario(){
+    public static function getFuncionarioActivo(){
         return Funcionario::query()->join('escolas','escolas.id','=','funcionarios.escola_id')
             ->join('categoria_funcionarios','categoria_funcionarios.id','=','funcionarios.categoria_funcionario_id')
             ->select('escolas.nome as escola','escolas.pasta','escolas.id as escola_id','categoria_funcionarios.*','funcionarios.id as func_id')

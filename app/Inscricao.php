@@ -18,4 +18,12 @@ class Inscricao extends Model{
         'estado_pagamento',
         'pasta'
     ];
+
+    public function getAluno(){
+        return $this->hasOne(Aluno::class,'id','aluno_id');
+    }
+
+    public function getCarta(){
+        return $this->hasOne(CategoriaCarta::class,'id','categoria_carta_id');
+    }
 }

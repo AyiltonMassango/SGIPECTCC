@@ -26,13 +26,14 @@ use Illuminate\Support\Facades\App;
 class InscricaoController extends Controller{
 
     public function index(){
-        return view('inscricao.index');
+        $funcionario = HomeController::getFuncionarioActivo();
+        $inscricoes = Inscricao::query()->where('escola_id',$funcionario->escola_id);
+        return view('inscricao.index',['inscricoes'=>$inscricoes->get(),'datas'=>$inscricoes->pluck('created_at')]);
     }
 
     public function create(){
-
         $provincias = Provincia::all();
-        $funcionario = HomeController::getFuncionario();
+        $funcionario = HomeController::getFuncionarioActivo();
         $categorias = EscolaController::getCategoriaCarta($funcionario->escola_id);
         return view('inscricao.create',compact('provincias','categorias'));
     }
@@ -40,7 +41,7 @@ class InscricaoController extends Controller{
     public function store(Request $request){
 
         $aluno = AlunoController::store($request);
-        $escola = HomeController::getFuncionario();
+        $escola = HomeController::getFuncionarioActivo();
 
         if($request->total_a_pagar == $request->valor_pagar){ //se pagar todo_valor
             $estado_payment = 1;

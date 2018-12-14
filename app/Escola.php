@@ -12,4 +12,8 @@ class Escola extends Model{
     public function getCategorias(){
         return $this->belongsToMany(CategoriaCarta::class,'classe_escolas','escola_id','cartacateg_id');
     }
+
+    public function getInscricoes(){
+        return $this->hasMany(Inscricao::class,'escola_id');
+    }
 }

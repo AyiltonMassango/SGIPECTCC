@@ -480,7 +480,6 @@
                     type: 'POST',
                     data: {'img': imagem,'inscricaoID':data},
                     success:function () {
-                        $('#btnSuccess').trigger('click');
                         $('#wizard_with_validation').trigger('reset');
                         $('#a_streamPDF')[0].click();
                     },error: function () {
@@ -519,6 +518,7 @@
                     contentType: false,
                     cache: false,
                     success: function (data) {
+                        $('#btnSuccess').trigger('click');
                         salvarPhoto(data);
                     },
                     error: function () {

@@ -32,7 +32,7 @@ class FuncionarioController extends Controller
     public function create(){
         $provincias = Provincia::all();
         $escolas = Escola::all();
-        $funcionario = HomeController::getFuncionario();
+        $funcionario = HomeController::getFuncionarioActivo();
 
         return view('funcionario.create',compact('provincias','escolas','funcionario'));
     }
