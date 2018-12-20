@@ -13,7 +13,8 @@ use Barryvdh\DomPDF;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -39,6 +40,7 @@ Route::group(['prefix'=>'escola'], function (){
     Route::get('/', 'EscolaController@index');
     Route::get('create','EscolaController@create');
 });
+Route::post('/salvarFotoCortada','EscolaController@salvarFotoCortada');
 
 
 Route::post('/read_theme','HomeController@read_theme');

@@ -26,31 +26,38 @@ class EscolaController extends Controller{
         $dir = HomeController::clean(($request->nome));//pasta da escola
         $pasta = '/schools/'.$dir;
 
-        if(is_dir(public_path().$pasta)){
-            echo 'error';
-        }else {
-            mkdir(public_path().$pasta);
-            mkdir(public_path().$pasta.'/inscricoes');
+        mkdir(public_path().$pasta);
+        mkdir(public_path().$pasta.'/inscricoes');
 
-            $enderecoController = new EnderecoController();
-            $enderecoID = $enderecoController->store2($request); //salva enderecoo e retorna seu id;
+        $enderecoController = new EnderecoController();
+        $enderecoID = $enderecoController->store2($request); //salva enderecoo e retorna seu id;
 
-            $escola = Escola::query()->create(['nome' => $request->nome, 'alvara_nr' => $request->alvara_nr,
-                'nuit' => $request->nuit, 'slogan' => $request->slogan,'pasta'=>$dir,'cor_escola'=>$request->cor_escola,
-                'estado' => 1, 'endereco_id' => $enderecoID, 'logo' => 'logo.jpg'
-            ]);
+        $escola = Escola::query()->create(['nome' => $request->nome, 'alvara_nr' => $request->alvara_nr,
+            'nuit' => $request->nuit, 'slogan' => $request->slogan,'pasta'=>$dir,'cor_escola'=>$request->cor_escola,
+            'estado' => 1, 'endereco_id' => $enderecoID, 'logo' => 'logo.jpg'
+        ]);
 
-            Contacto::query()->create(['nr_telefone'=>$request->nr_telefone,'nr_alternativo'=>$request->nr_alternativo,
-                'email'=>$request->email,
-                'escola_id' =>$escola->id
-            ]);
+        Contacto::query()->create(['nr_telefone'=>$request->nr_telefone,'nr_alternativo'=>$request->nr_alternativo,
+            'email'=>$request->email,
+            'escola_id' =>$escola->id
+        ]);
 
-            if (isset($_FILES['inputFoto'])) {
-                $tmp = $_FILES['inputFoto']['tmp_name'];
-                move_uploaded_file($tmp, public_path() . $pasta . '/logo.jpg');
-            }
-            echo 'done';
-        }
+//        if (isset($_FILES['inputFoto'])) {
+//            $tmp = $_FILES['inputFoto']['tmp_name'];
+//            move_uploaded_file($tmp, public_path() . $pasta . '/logo.jpg');
+//        }
+        echo $pasta;
+    }
+
+    public function salvarFotoCortada(){
+        $data = $_POST['image'];
+        $pasta = $_POST['pasta'];
+        list(, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+
+        $data = base64_decode($data);
+        $imageName = '/logo.jpg';
+        file_put_contents(public_path().$pasta.$imageName, $data);
     }
 
     public function show(Escola $escola){

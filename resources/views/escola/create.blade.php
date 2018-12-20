@@ -3,9 +3,7 @@
     $provincias = \App\Provincia::all();
 @endphp
 @section('css')
-    <style>
-
-    </style>
+    <link href="{{asset('plugins/croppie/croppie.css')}}" rel="stylesheet"/>
 @endsection
 @section('title')
     {{__('Cadastrar Escola')}}
@@ -26,19 +24,19 @@
 
                     <form method="POST" id="form_validation" autocomplete="off">
                         <input type="hidden" id="cor_escola" name="cor_escola" value="red">
-                        <input type="file" style="display: none" id="inputFoto" accept="image/jpeg" name="inputFoto">
+                        <input type="file" style="display: none" id="inputFoto" accept="image/jpeg/png" name="inputFoto">
                         @csrf
                         <div class="row">
                             <div class="col-sm-4 justify-content-center">
-                                <fieldset class="p-3 " style="border: solid #adadad 1px; border-radius: 5px">
+                                <fieldset class="pl-3 pr-3 pt-0" style="border: solid #adadad 1px; border-radius: 5px">
                                     <legend>
                                         <label for="inputFoto" style="width: 100%" class="btn btn-primary waves-effect">
                                             <i class="fa fa-photo green">
                                             </i>&nbsp;Anexa Logotipo
                                         </label>
                                     </legend>
-                                    <div class="row justify-content-center" style="height: 152px;">
-                                        <img id="fotoFinal" class="" src="{{asset('images/backend/schoollogo.png')}}" style="width: 80%; height: 100%">
+                                    <div class="row justify-content-center" style="height: 190px;">
+                                        <div id="uploadCrop"></div>
                                     </div>
                                 </fieldset>
                             </div>
@@ -198,7 +196,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="justify-content-center">
+                    <div class="justify-content-center" id="cores">
                         <ul class="demo-choose-skin">
                             <li data-theme="red" class="active">
                                 <div class="red"></div>
@@ -288,18 +286,22 @@
     </div>
 @endsection
 @section('script')
+    <script src="{{asset('plugins/croppie/croppie.js')}}"></script>
     <script>
         $(document).ready(function () {
 
-            $('#btn-cor').click(function () {
+            $.ajaxSetup({
+                headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            });
 
+            $('#btn-cor').click(function () {
                 $('#modal-color').modal({
                     show: true,
                     backdrop: "static"
                 });
             });
 
-            $('.demo-choose-skin li').on('click', function () {
+            $('#cores .demo-choose-skin li').on('click', function () {
                 var $this = $(this);
                 $('.demo-choose-skin li').removeClass('active');
                 $this.addClass('active');
@@ -313,21 +315,6 @@
             $('#li_ecola').addClass('active');
             $('#a_escola').trigger('click');
             $('#a_add_escola').addClass('active');
-
-            $('#inputFoto').on('change',function () {
-                var img = document.getElementById("fotoFinal");
-                loadFoto(this, img);
-            });
-
-            function loadFoto(file, img){ //funcao que exibe a imagem apos selecinar no file chooser
-                if (file.files && file.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        img.src = e.target.result;
-                    };
-                    reader.readAsDataURL(file.files[0]);
-                }
-            }
 
             function preencherDistrit(select,provinciaID) {
                 $.ajax({
@@ -370,25 +357,58 @@
                     processData: false,
                     contentType: false,
                     cache: false
-                }).done(function (msg) { //retorna msg
-                    if (msg !== 'error') {
-                        $('#divAlert').removeClass('d-none');
-                        $('#form_validation').trigger('reset');
-                        document.getElementById('fotoFinal').src = "{{asset('images/backend/schoollogo.png')}}";
-                    } else {
-                        $('#divAlert').addClass('bg-danger');
-                        $('#divAlert').removeClass('d-none');
-                        $('#alert-text').text('Erro ao Registar Escola');
-                    }
+                }).done(function (pasta) { //retorna msg
+                    alert(pasta);
+                    $('#divAlert').removeClass('d-none');
+                    savarFotoCortada(pasta);
                 }).fail(function () {
-                    alert('Erro na funcao');
+                    $('#divAlert').addClass('bg-danger');
+                    $('#divAlert').removeClass('d-none');
+                    $('#alert-text').text('Erro ao Registar Escola');
                 });
             });
 
-            $('.btn-default').click(function () {
-                $('#form_validation').trigger('reset');
-                document.getElementById('fotoFinal').src = "{{asset('images/backend/schoollogo.png')}}";
+            $uploadCrop = $('#uploadCrop').croppie({
+                enableExif: true,
+                viewport: {
+                    width: 220,
+                    height: 95,
+                },
+                boundary: {
+                    width: 85,
+                    height: 140
+                }
             });
+
+            $('#inputFoto').on('change', function () {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    }).then(function(){
+                        console.log('Foto carregada com sucesso');
+                    });
+
+                };
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            function savarFotoCortada(pasta){
+                $uploadCrop.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function (resp) {
+                    $.ajax({
+                        url: '/salvarFotoCortada',
+                        type: 'POST',
+                        data: {'image': resp,'pasta':pasta},
+                        success: function () {
+                            console.info('Foto salva');
+                            $('#form_validation').trigger('reset');
+                        },
+                    });
+                });
+            }
         });
     </script>
 @endsection

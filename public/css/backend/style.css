@@ -2249,36 +2249,49 @@
 .demo-choose-skin {
   list-style: none;
   padding-left: 0;
-  overflow-y: hidden; }
-  .demo-choose-skin li {
-    border-bottom: 1px solid #eee;
-    padding: 10px 10px 4px 10px;
-    position: relative;
-    cursor: pointer; }
-    .demo-choose-skin li.active {
-      background-color: #eee; }
-      .demo-choose-skin li.active:after {
-        font-family: 'Material Icons';
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        content: '\E876';
-        font-size: 18px;
-        font-weight: bold; }
-    .demo-choose-skin li:hover {
-      background-color: #eee; }
-    .demo-choose-skin li div {
-      width: 24px;
-      height: 24px;
-      display: inline-block;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      -ms-border-radius: 3px;
-      border-radius: 3px; }
-    .demo-choose-skin li span {
-      position: relative;
-      bottom: 7px;
-      left: 5px; }
+  overflow-y: hidden;
+}
+
+.demo-choose-skin li {
+  border-bottom: 1px solid #eee;
+  padding: 10px 10px 4px 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.demo-choose-skin li.active {
+  background-color: #eee;
+}
+
+.demo-choose-skin li.active:after {
+  font-family: 'Material Icons';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  content: '\E876';
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.demo-choose-skin li:hover {
+  background-color: #eee;
+}
+
+.demo-choose-skin li div {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.demo-choose-skin li span {
+  position: relative;
+  bottom: 7px;
+  left: 5px;
+}
 
   .demo-choose-skin .red {
     background-color: #F44336; }
