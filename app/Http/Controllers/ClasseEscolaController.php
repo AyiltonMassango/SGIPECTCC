@@ -14,7 +14,8 @@ class ClasseEscolaController extends Controller
      */
     public function index()
     {
-        //
+        //$categoriaCartas=CategoriaCarta::all();
+        return view('CartaEscola');
     }
 
     /**
@@ -49,7 +50,7 @@ class ClasseEscolaController extends Controller
         $classeEscola->preco=$request->input('preco');
         $classeEscola->estado=1;
         $classeEscola->save();
-        return redirect('/categoriacarta')->with('info','Categoria de Carta Cadastrada associada à Escola!');
+        return redirect('/classeEscola')->with('info','Categoria de Carta Cadastrada associada à Escola!');
     }
 
     /**

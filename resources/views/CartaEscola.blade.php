@@ -17,7 +17,7 @@
                 <div class="body mb-0">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 mb-0">
-                            <form method="POST" action="{{url('/registarcategcartas')}}" autocomplete="off">
+                            <form method="POST" action="{{url('/registarClasseEscola')}}" autocomplete="off">
                                 {{csrf_field()}}
                                 @if(session('info'))
                                     <div class="alert bg-green alert-dismissible" role="alert">
@@ -28,25 +28,37 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <label for="selectEscola" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola de Condução</label>
-                                        <select title="" id="selectEscola" class="form-control-file" data-size="5" style="width: 100%;">
+                                        <select title="" id="escolaId" name="escolaId" class="form-control-file" data-size="5" style="width: 100%;">
                                             @foreach($escolas as $esc)
                                                 <option id="{{$esc->id}}" value="{{$esc->id}}">{{$esc->nome}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-4 form-group">
+
+                                    <div class="col-sm-4">
+                                        <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola de Condução</label>
+                                        <select title="" id="categoriaCartaId" name="categoriaCartaId" class="form-control-file" data-size="5" style="width: 100%;">
+                                            @foreach($categoriaCarta as $catCarta)
+                                                <option id="{{$catCarta->id}}" value="{{$catCarta->id}}">{{$catCarta->designacao}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-sm-8 form-group">
                                         <div class="form-line form-float">
-                                            <input type="text" name="designacao" id="designacao" class="form-control" required>
-                                            <label for="designacao" class="form-label">Designação</label>
+                                            <label for="preco" class="form-label">Preço</label>
+                                            <input type="text" name="preco" id="preco" class="form-control" required>
+
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-4 form-group">
                                         <button type="submit" class="btn btn-success waves-effect w-100">
                                             <i class="material-icons">save</i>
                                             <span>Cadastrar</span>
                                         </button>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
@@ -56,25 +68,25 @@
             <div class="card">
                 <div class="card-header pt-3 pb-0">
                     <h6 class="card-title">
-                        <i class="fa fa-list"></i>&nbsp;Categorias Registadas
-                    </h6>
+                        <i class="fa fa-list"></i>&nbsp;Listas de Categorias de Por Escola
                 </div>
                 <div class="card-body mb-0">
                     <table class="table table-striped mb-0">
                         <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Designação</th>
+                            <th>Categoria de Carta</th>
+                            <th>Escola de Condução</th>
+                            <th>Preço</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categoriaCartas as $cartaCateg)
+                        {{--@foreach($categoriaCartas as $cartaCateg)--}}
                             <tr>
-                                <th scope="row">{{$cartaCateg->id}}</th>
-                                <td>{{$cartaCateg->designacao}}</td>
+                                {{--<th scope="row">{{$cartaCateg->id}}</th>--}}
+                                {{--<td>{{$cartaCateg->designacao}}</td>--}}
                                 <td>
-                                    <button data-title="{{$cartaCateg->designacao}}" class="btn btn-primary btn-sm mt-0 mb-0
+                                    {{--<button data-title="{{$cartaCateg->designacao}}" class="btn btn-primary btn-sm mt-0 mb-0--}}
                                      waves-effect waves-circle waves-float" title="Info" type="button">
                                         <i class="material-icons">info</i>
                                     </button>
@@ -86,7 +98,7 @@
                                     </button>
                                 </td>
                             </tr>
-                        @endforeach
+                        {{--@endforeach--}}
                         </tbody>
                     </table>
                 </div>

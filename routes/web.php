@@ -25,7 +25,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/categoriacarta','CategoriaCartaController@index');
 Route::post('/registarcategcartas', 'CategoriaCartaController@create');
 Route::get('/registarInscricao', 'InscricaoController@storePayment');
-Route::get('/classeEscola', 'ClasseEscolaController@store');
+
+
+//rotas das classes da escola
+Route::get('/classeEscola', 'ClasseEscolaController@index');
+Route::post('/registarClasseEscola', 'ClasseEscolaController@store');
 
 
 //rotas do funcionario
