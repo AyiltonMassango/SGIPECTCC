@@ -1,4 +1,9 @@
 @extends('layout.app')
+@php
+    $escolas = \App\Escola::all();
+    $categoriaCarta = \App\CategoriaCarta::all();
+@endphp
+
 @section('content')
     <!-- Vertical Layout -->
     <div class="row clearfix">
@@ -6,7 +11,7 @@
             <div class="card mb-2">
                 <div class="card-header pt-3 pb-0">
                     <h6 class="card-title">
-                        <i class="fa fa-pencil"></i>&nbsp;Registar Categorias das Cartas
+                        <i class="fa fa-pencil"></i>&nbsp;Definir Preços das Cartas nas Escolas
                     </h6>
                 </div>
                 <div class="body mb-0">
@@ -21,7 +26,15 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-sm-8 form-group">
+                                    <div class="col-sm-4">
+                                        <label for="selectEscola" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola de Condução</label>
+                                        <select title="" id="selectEscola" class="form-control-file" data-size="5" style="width: 100%;">
+                                            @foreach($escolas as $esc)
+                                                <option id="{{$esc->id}}" value="{{$esc->id}}">{{$esc->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 form-group">
                                         <div class="form-line form-float">
                                             <input type="text" name="designacao" id="designacao" class="form-control" required>
                                             <label for="designacao" class="form-label">Designação</label>
@@ -33,6 +46,7 @@
                                             <span>Cadastrar</span>
                                         </button>
                                     </div>
+
                                 </div>
                             </form>
                         </div>
@@ -78,35 +92,5 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 
-            <div class="card">
-                <div class="header pt-3 pb-0">
-                    <h6 class="card-title">
-                        <i class="fa fa-info-circle"></i>&nbsp;Escolas que Leccionam&nbsp;<strong id="h6School" style=color:#82b6ff>Ligeiros</strong>
-                    </h6>
-                </div>
-                <div class="body">
-                    <div class="list-group">
-                        <a class="list-group-item">Jessica</a>
-                        <a class="list-group-item">Emilio</a>
-                        <a class="list-group-item">RosFil</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 @stop
-
-@section('script')
-    <script>
-        $(document).ready(function () {
-            $('#li_home').removeClass('active');
-            $('#li_categoria').addClass('active');
-
-            $('.btn-primary').click(function () {
-                $('#h6School').html($(this).attr('data-title'));
-            })
-        })
-    </script>
-@endsection

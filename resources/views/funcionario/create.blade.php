@@ -1,5 +1,7 @@
 @extends('layout.app')
-
+@php
+    $categoriaFuncionario = \App\CategoriaFuncionario::all();
+@endphp
 @section('content')
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -103,7 +105,7 @@
                             </fieldset>
 
                             <fieldset class="col-lg-12 mt-2" style="border: solid #87939a 1px; border-radius: 5px">
-                                <legend class="text-left mb-0"><label style="background-color: #009688; color: white; font-size: 14px" class="btn waves-effect">Dados bla bla bla</label></legend>
+                                <legend class="text-left mb-0"><label style="background-color: #009688; color: white; font-size: 14px" class="btn waves-effect">Associar Funcionário à Escola de Condução</label></legend>
                                 <hr class="mt-0">
                                 <div class="row">
                                     @if($funcionario == null)
@@ -118,7 +120,11 @@
 
                                         <div class="col-sm-4">
                                             <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Categoria do Funcionário</label>
-                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="selectCategoria" data-size="8">
+
+                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="" data-size="8">
+                                                @foreach($categoriaFuncionario as $funcCateg)
+                                                    <option value="{{$funcCateg->id}}">{{$funcCateg->designacao}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     @else
@@ -126,12 +132,20 @@
                                             <label for="selectEscola" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola</label>
                                             <select title="" name="escola_id" id="selectEscola" class="form-control-file" data-size="8" style="width: 100%;">
                                                 <option value="{{$funcionario->escola_id}}">{{$funcionario->escola}}</option>
+
                                             </select>
                                         </div>
 
                                         <div class="col-sm-4">
                                             <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Categoria do Funcionário</label>
+                                            {{--<select title="" name="categoria_funcionario_id" class="form-control-file" id="selectCategoria" data-size="8">--}}
+                                                {{--<select title="" name="categoria_funcionario_id" class="form-control-file" id="selectCategoria" data-size="8">--}}
+                                                {{--</select>--}}
+                                            {{--</select>--}}
                                             <select title="" name="categoria_funcionario_id" class="form-control-file" id="selectCategoria" data-size="8">
+                                                @foreach($categoriaFuncionario as $funcCateg)
+                                                    <option value="{{$funcCateg->id}}">{{$funcCateg->designacao}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     @endif

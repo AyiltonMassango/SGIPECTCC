@@ -25,6 +25,7 @@ class ClasseEscolaController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -36,6 +37,19 @@ class ClasseEscolaController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+                'preco'=> 'required',
+                'escolaId' => 'required',
+                'categoriaCartaId' => 'required',
+            ]
+        );
+        $classeEscola=new ClasseEscola();
+        $classeEscola->escola_id=$request->input('escolaId');
+        $classeEscola->cartacateg_id=$request->input('categoriaCartaId');
+        $classeEscola->preco=$request->input('preco');
+        $classeEscola->estado=1;
+        $classeEscola->save();
+        return redirect('/categoriacarta')->with('info','Categoria de Carta Cadastrada associada à Escola!');
     }
 
     /**

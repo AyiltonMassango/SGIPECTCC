@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaCarta;
+use App\CategoriaFuncionario;
 use App\Contacto;
 use App\Escola;
 use App\FuncCategoriaEscola;
@@ -32,6 +34,7 @@ class FuncionarioController extends Controller
     public function create(){
         $provincias = Provincia::all();
         $escolas = Escola::all();
+
         $funcionario = HomeController::getFuncionarioActivo();
 
         return view('funcionario.create',compact('provincias','escolas','funcionario'));
