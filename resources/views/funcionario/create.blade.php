@@ -54,7 +54,7 @@
                                 <div class="row" id="divEscolaEnredeco">
                                     <div class="col-sm-4">
                                         <label for="selectProvincia" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Provincia</label>
-                                        <select title="" id="selectProvincia" class="form-control-file" data-size="5" style="width: 100%;">
+                                        <select title="" id="selectProvincia" class="form-control-file" data-size="5" style="width: 100%;" data-live-search="true">
                                             @foreach($provincias as $pro)
                                                 <option id="{{$pro->id}}" value="{{$pro->id}}">{{$pro->designacao}}</option>
                                             @endforeach
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="selectDistrito" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Distrito</label>
-                                        <select title="" name="distrito_id" class="form-control-file" id="selectDistrito" data-size="5">
+                                        <select title="" name="distrito_id" class="form-control-file" id="selectDistrito"  style="width: 100%;" data-size="5" data-live-search="true">
                                         </select>
                                     </div>
                                     <div class="col-sm-4 pt-3">
@@ -111,7 +111,7 @@
                                     @if($funcionario == null)
                                         <div class="col-sm-4">
                                             <label for="selectEscola" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola</label>
-                                            <select title="" name="escola_id" id="selectEscola" class="form-control-file" data-size="8" style="width: 100%;">
+                                            <select title="" name="escola_id" id="selectEscola" class="form-control-file" data-size="8" style="width: 100%;" data-live-search="true">
                                                 @foreach($escolas as $scl)
                                                     <option value="{{$scl->id}}">{{$scl->nome}}</option>
                                                 @endforeach
@@ -121,7 +121,7 @@
                                         <div class="col-sm-4">
                                             <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Categoria do Funcionário</label>
 
-                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="" data-size="8">
+                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="" data-size="8" data-live-search="true" >
                                                 @foreach($categoriaFuncionario as $funcCateg)
                                                     <option value="{{$funcCateg->id}}">{{$funcCateg->designacao}}</option>
                                                 @endforeach
@@ -130,7 +130,7 @@
                                     @else
                                         <div class="col-sm-4 d-none">
                                             <label for="selectEscola" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola</label>
-                                            <select title="" name="escola_id" id="selectEscola" class="form-control-file" data-size="8" style="width: 100%;">
+                                            <select title="" name="escola_id" id="selectEscola" class="form-control-file" data-size="8" style="width: 100%;" data-live-search="true">
                                                 <option value="{{$funcionario->escola_id}}">{{$funcionario->escola}}</option>
 
                                             </select>
@@ -142,7 +142,7 @@
                                                 {{--<select title="" name="categoria_funcionario_id" class="form-control-file" id="selectCategoria" data-size="8">--}}
                                                 {{--</select>--}}
                                             {{--</select>--}}
-                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="selectCategoria" data-size="8">
+                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="selectCategoria" data-size="8" data-live-search="true">
                                                 @foreach($categoriaFuncionario as $funcCateg)
                                                     <option value="{{$funcCateg->id}}">{{$funcCateg->designacao}}</option>
                                                 @endforeach

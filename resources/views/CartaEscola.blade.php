@@ -28,7 +28,7 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <label for="selectEscola" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola de Condução</label>
-                                        <select title="" id="escolaId" name="escolaId" class="form-control-file" data-size="5" style="width: 100%;">
+                                        <select title="" id="escolaId" name="escolaId" class="form-control-file" data-size="5" style="width: 100%;" data-live-search="true">
                                             @foreach($escolas as $esc)
                                                 <option id="{{$esc->id}}" value="{{$esc->id}}">{{$esc->nome}}</option>
                                             @endforeach
@@ -37,7 +37,7 @@
 
                                     <div class="col-sm-4">
                                         <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola de Condução</label>
-                                        <select title="" id="categoriaCartaId" name="categoriaCartaId" class="form-control-file" data-size="5" style="width: 100%;">
+                                        <select title="" id="categoriaCartaId" name="categoriaCartaId" class="form-control-file" data-size="5" style="width: 100%;" data-live-search="true">
                                             @foreach($categoriaCarta as $catCarta)
                                                 <option id="{{$catCarta->id}}" value="{{$catCarta->id}}">{{$catCarta->designacao}}</option>
                                             @endforeach
@@ -68,7 +68,7 @@
             <div class="card">
                 <div class="card-header pt-3 pb-0">
                     <h6 class="card-title">
-                        <i class="fa fa-list"></i>&nbsp;Listas de Categorias de Por Escola
+                        <i class="fa fa-list"></i>&nbsp;Listas de Categorias de Por Escola</h6>
                 </div>
                 <div class="card-body mb-0">
                     <table class="table table-striped mb-0">
@@ -104,5 +104,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 @stop
