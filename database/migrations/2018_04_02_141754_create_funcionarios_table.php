@@ -31,8 +31,8 @@ class CreateFuncionariosTable extends Migration
             $table->integer('escola_id')->unsigned();
             $table->foreign('escola_id')->references('id')->on('escolas');
             $table->integer('categoria_funcionario_id')->unsigned();
-            $table->foreign('categoria_funcionario_id')->references('funcCateg_id')->on('func_categoria_escolas');
- 
+            $table->foreign('categoria_funcionario_id')->references('id')->on('categoria_funcionarios');
+
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 

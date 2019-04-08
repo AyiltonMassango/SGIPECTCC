@@ -15,11 +15,11 @@ class CreateFuncCategoriaEscolasTable extends Migration
     {
         Schema::create('func_categoria_escolas', function (Blueprint $table) {
             $table->integer('escola_id')->unsigned();
+            $table->foreign('escola_id')->references('id')->on('escolas');
             $table->integer('funcCateg_id')->unsigned();
+            $table->foreign('funcCateg_id')->references('id')->on('categoria_funcionarios');
             $table->primary(['escola_id', 'funcCateg_id']);
             $table->boolean('estado');
-            $table->foreign('escola_id')->references('id')->on('escolas');
-            $table->foreign('funcCateg_id')->references('id')->on('categoria_funcionarios');
             $table->timestamps();
         });
     }

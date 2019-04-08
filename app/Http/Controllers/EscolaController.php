@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\CategoriaFuncionario;
+
 use App\ClasseEscola;
 use App\Contacto;
 use App\Distrito;
-use App\Endereco;
 use App\Escola;
-use App\Funcionario;
-use App\User;
 use Illuminate\Http\Request;
 
 class EscolaController extends Controller{
@@ -42,10 +39,10 @@ class EscolaController extends Controller{
             'escola_id' =>$escola->id
         ]);
 
-//        if (isset($_FILES['inputFoto'])) {
-//            $tmp = $_FILES['inputFoto']['tmp_name'];
-//            move_uploaded_file($tmp, public_path() . $pasta . '/logo.jpg');
-//        }
+        if (isset($_FILES['inputFoto'])) {
+            $tmp = $_FILES['inputFoto']['tmp_name'];
+            move_uploaded_file($tmp, public_path() . $pasta . '/logo.jpg');
+        }
         echo $pasta;
     }
 

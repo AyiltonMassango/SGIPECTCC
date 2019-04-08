@@ -1,5 +1,13 @@
     {{--<input name="endereco_id" id="endereco_id" type="hidden">--}}
+    {{csrf_field()}}
+    @if(session('info'))
+        <div class="alert bg-green alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{session('info')}}
+        </div>
+    @endif
     <div class="row">
+
         <div class="col-sm-4">
             <div class="">
                 <fieldset class="pt-1 p-2" style="border: solid #adadad 1px; border-radius: 5px">
@@ -114,8 +122,8 @@
         <div class="col-sm-4">
             <label for="tipoDocumento" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Tipo de Documento</label>
             <select title="" name="tipoDocumento" id="tipoDocumento" class="form-control-file"  style="width: 100%">
-                <option selected value="BI">BI</option>
-                <option value="Passaport">Passaport</option>
+                <option selected value="BI">B.I</option>
+                <option value="Passaporte">Passaporte</option>
             </select>
         </div>
         <div class="col-sm-4 pt-3">

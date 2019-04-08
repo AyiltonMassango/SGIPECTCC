@@ -19,6 +19,7 @@ class CreateEscolasTable extends Migration
             $table->string('alvara_nr',150)->unique();
             $table->string('nuit');
             $table->string('slogan');
+            $table->string('pasta');
             $table->longText('logo');
             $table->boolean('estado');
             $table->string('cor_escola');

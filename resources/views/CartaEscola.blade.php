@@ -2,12 +2,13 @@
 @php
     $escolas = \App\Escola::all();
     $categoriaCarta = \App\CategoriaCarta::all();
+    $classeEscola = \App\ClasseEscola::all();
 @endphp
 
 @section('content')
     <!-- Vertical Layout -->
     <div class="row clearfix">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card mb-2">
                 <div class="card-header pt-3 pb-0">
                     <h6 class="card-title">
@@ -26,7 +27,7 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <label for="selectEscola" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola de Condução</label>
                                         <select title="" id="escolaId" name="escolaId" class="form-control-file" data-size="5" style="width: 100%;" data-live-search="true">
                                             @foreach($escolas as $esc)
@@ -35,7 +36,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Escola de Condução</label>
                                         <select title="" id="categoriaCartaId" name="categoriaCartaId" class="form-control-file" data-size="5" style="width: 100%;" data-live-search="true">
                                             @foreach($categoriaCarta as $catCarta)
@@ -74,31 +75,38 @@
                     <table class="table table-striped mb-0">
                         <thead>
                         <tr>
-                            <th>Categoria de Carta</th>
                             <th>Escola de Condução</th>
+                            <th>Categoria de Carta</th>
                             <th>Preço</th>
+                            <th>Estado</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {{--@foreach($categoriaCartas as $cartaCateg)--}}
+                        @foreach($classeEscola as $cE)
                             <tr>
-                                {{--<th scope="row">{{$cartaCateg->id}}</th>--}}
-                                {{--<td>{{$cartaCateg->designacao}}</td>--}}
+                                @foreach($escolas as $escola)
+                                    @if($cE->escola_id==$escola->id)
+                                        <td scope="row">{{$escola->nome}}</td>
+                                    @foreach($categoriaCarta as $cartaCateg)
+                                        @if($cE->cartacateg_id==$cartaCateg->id)
+                                                <td>{{$cartaCateg->designacao}}</td>
+                                                <td>{{$cE->preco}}</td>
+                                                @if($cE->estado==1)
+                                                    <td>Activo(a)</td>
+                                                  @else
+                                                    <td>Inactivo(a)</td>
+                                                @endif
+                                        @endif
+                                    @endforeach
+                                    @endif
+                                @endforeach
                                 <td>
-                                    {{--<button data-title="{{$cartaCateg->designacao}}" class="btn btn-primary btn-sm mt-0 mb-0--}}
-                                     waves-effect waves-circle waves-float" title="Info" type="button">
-                                        <i class="material-icons">info</i>
-                                    </button>
-                                    <button class="btn btn-sm btn-warning mt-0 mb-0 waves-effect waves-circle waves-float"
-                                            title="Editar" type="button"><i class="material-icons">mode_edit</i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger mt-0 mb-0  waves-effect waves-circle waves-float"
-                                            title="Remover" type="button"><i class="material-icons">delete</i>
-                                    </button>
+                                    <button href="{{url('')}}" class="btn btn-primary ver"> Ver |</button>
+                                    <a href="{{url('') }}" class="label label-danger"> Editar </a>
                                 </td>
                             </tr>
-                        {{--@endforeach--}}
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

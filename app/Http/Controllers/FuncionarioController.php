@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\CategoriaCarta;
-use App\CategoriaFuncionario;
 use App\Contacto;
 use App\Escola;
 use App\FuncCategoriaEscola;
@@ -71,11 +69,11 @@ class FuncionarioController extends Controller
             'estado_funcionario'=>1,
             'user_id'=>$user->id
         ]);
-
+        FuncCategoriaEscola::create(['escola_id'=>$request->escola_id, 'funcCateg_id'=>$request->categoria_funcionario_id, 'estado'=>1]);
         Contacto::query()->create(['nr_telefone'=>$request->nr_telefone,'nr_alternativo'=>$request->nr_alternativo,
             'funcionario_id' =>$funcionario->id
         ]);
-        return value('salvo');
+        return redirect('/funcionario')->with('info','Funcionário cadastrado com sucesso!');
 //        echo $user->email;
     }
 

@@ -121,7 +121,7 @@
                                         <div class="col-sm-4">
                                             <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Categoria do Funcionário</label>
 
-                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="" data-size="8" data-live-search="true" >
+                                            <select title="" name="categoria_funcionario_id" class="form-control-file" id="categoria_funcionario_id" data-size="8" data-live-search="true" >
                                                 @foreach($categoriaFuncionario as $funcCateg)
                                                     <option value="{{$funcCateg->id}}">{{$funcCateg->designacao}}</option>
                                                 @endforeach
@@ -182,7 +182,7 @@
                     data: {'provinciaID': $(this).val()},
                     success: function (rs) {
                         $('.xx').remove();
-                        for (var k = 0; k < rs.dados.length; k++) {
+                        for (let k = 0; k < rs.dados.length; k++) {
                             $('#selectDistrito').append(
                                 "<option class='xx' value='" + rs.dados[k].id + "'>" + rs.dados[k].designacao + "</option>"
                             ).selectpicker('refresh');
