@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\FuncCategoriaEscola;
+use App\Funcionario;
 use Illuminate\Http\Request;
 
 class FuncCategoriaEscolaController extends Controller
@@ -15,6 +16,22 @@ class FuncCategoriaEscolaController extends Controller
     public function index()
     {
         //
+//        $funcionarios = Funcionario::query()
+//        ->join('funcionarios', 'func_categoria_escolas.escola_id','=','funcionarios.escola_id')
+//        ->where('func_categoria_escolas.escola_id','=',1)
+//        ->where('func_categoria_escolas.estado','=',1)
+//        ->select('funcionarios.*')->get();
+
+
+//        $categoria = FuncCategoriaEscola::query()
+//            ->join('categoria_funcionarios','func_categoria_escolas.funcCateg_id','=','categoria_funcionarios.id')
+////            ->join('funcionarios', 'func_categoria_escolas.escola_id','=','funcionarios.escola_id')
+//            ->where('func_categoria_escolas.escola_id','=',1)
+//            ->where('func_categoria_escolas.estado','=',1)
+//            ->select('categoria_funcionarios.*')->get();
+
+        $funcionario = HomeController::getFuncionarioActivo();
+        return view('escola.funcionarios.lista',compact('funcionario'));
     }
 
     /**
@@ -25,6 +42,8 @@ class FuncCategoriaEscolaController extends Controller
     public function create()
     {
         //
+
+
     }
 
     /**

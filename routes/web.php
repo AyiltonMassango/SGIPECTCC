@@ -36,6 +36,8 @@ Route::post('/registarClasseEscola', 'ClasseEscolaController@store');
 Route::get('/funcionario', 'FuncionarioController@create');
 Route::get('/funcionario/create', 'FuncionarioController@create');
 Route::get('/funcionario/store', 'FuncionarioController@store');
+Route::get('/funcEscola', 'FuncCategoriaEscolaController@index');
+
 
 Route::group(['prefix'=>'inscricao'], function () {
     Route::get('/', 'InscricaoController@index');

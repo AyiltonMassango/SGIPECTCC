@@ -45,7 +45,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-sm-8 form-group">
+                                    <div class="col-sm-12 form-group">
                                         <div class="form-line form-float">
                                             <label for="preco" class="form-label">Preço</label>
                                             <input type="text" name="preco" id="preco" class="form-control" required>
@@ -103,7 +103,7 @@
                                 @endforeach
                                 <td>
                                     <button href="{{url('')}}" class="btn btn-primary ver"> Ver |</button>
-                                    <a href="{{url('') }}" class="label label-danger"> Editar </a>
+                                    <button href="{{url('') }}" class="label label-danger"> Editar </button>
                                 </td>
                             </tr>
                         @endforeach

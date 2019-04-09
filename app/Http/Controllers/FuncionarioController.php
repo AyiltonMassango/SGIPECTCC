@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoriaFuncionario;
 use App\Contacto;
 use App\Escola;
 use App\FuncCategoriaEscola;
@@ -35,7 +36,10 @@ class FuncionarioController extends Controller
 
         $funcionario = HomeController::getFuncionarioActivo();
 
+
         return view('funcionario.create',compact('provincias','escolas','funcionario'));
+
+
     }
 
     /**
@@ -123,11 +127,23 @@ class FuncionarioController extends Controller
     }
 
     public function getCategoriaFuncionario(){
-        $categorias = FuncCategoriaEscola::query()
+        //$categorias = FuncCategoriaEscola::query()
+        $categorias = CategoriaFuncionario::all();
+//            ->join('categoria_funcionarios','func_categoria_escolas.funcCateg_id','=','categoria_funcionarios.id')
+//            ->where('func_categoria_escolas.escola_id',$_POST['escola_id'])
+//            ->where('func_categoria_escolas.estado','=',1)
+//            ->select('categoria_funcionarios.*')->get();
+        return response()->json(array('dados' => $categorias));
+    }
+
+    public function funcionariosEscola()
+    {
+        $funcionarios = FuncCategoriaEscola::query()
             ->join('categoria_funcionarios','func_categoria_escolas.funcCateg_id','=','categoria_funcionarios.id')
+            ->join('funcionarios', 'func_categoria_escolas.escola_id','=','funcionarios.escola_id')
             ->where('func_categoria_escolas.escola_id',$_POST['escola_id'])
             ->where('func_categoria_escolas.estado','=',1)
-            ->select('categoria_funcionarios.*')->get();
-        return response()->json(array('dados' => $categorias));
+            ->select('categoria_funcionarios.*','funcionarios.*')->get();
+
     }
 }
