@@ -47,30 +47,33 @@
                                 <th>Acções</th>
                             </tr>
                             </tfoot>
-                            <tbody>
+                            <tr>
 
                             @foreach($funcionarios as $func)
                                 <tr>
                                     @if($func->escola_id==$funcionario->escola_id)
                                         @foreach($categoriaFuncionario as $categ)
                                             @foreach($escolaClasse as $escola)
-                                           @if($escola->escola_id==$funcionario->escola_id and $escola->funcCateg_id==$func->categoria_funcionario_id and $categ->id==$func->categoria_funcionario_id)
+                                           @if($categ->id==$func->categoria_funcionario_id)
                                               <td> {{$func->nome}} {{$func->apelido}}</td>
                                               <td>{{$categ->designacao}}</td>
-                                                @if($func->estado_funcionario==1)
-                                                     <td>Activo(a)</td>
-                                                     @else
-                                                     <td>Inactivo(a)</td>
-                                                @endif
+
                                            @endif
-                                              <td>
+
+
+
+                                    @endforeach
+                                    @endforeach
+                                            @if($func->estado_funcionario==1)
+                                                <td>Activo(a)</td>
+                                            @else
+                                                <td>Inactivo(a)</td>
+                                            @endif
+                                            <td>
                                                 <button href="{{url('')}}" class="btn btn-primary ver"> Ver </button>
                                                 <button href="{{url('') }}" class="label label-danger"> Editar </button>
-                                              </td>--
-
-                                    </tr>
-                                    @endforeach
-                                    @endforeach
+                                            </td>--
+                            </tr>
                                     @endif
                                     @endforeach
                                     </tbody>
