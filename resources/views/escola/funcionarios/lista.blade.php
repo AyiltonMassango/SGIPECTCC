@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('title')In @endsection
 @php
-    $categoriaCarta = \App\CategoriaCarta::all();
+    $categoriaFuncionario = \App\CategoriaFuncionario::all();
     $escolaClasse = \App\FuncCategoriaEscola::all();
     $funcionarios = \App\Funcionario::all();
 @endphp
@@ -48,41 +48,38 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            @foreach($escolaClasse as $eC)
-                            <tr>
-                                @foreach($funcionario as $func)
-                                    @foreach($funcionarios as $funcEscola)
-                                    @if($eC->escola_id==$func->escola_id and $func->escola_id==$funcEscola->escola_id)
-                                         <td>{{$funcEscola->nome}} {{$funcEscola->apelido}}</td>
-                                        @else
-                                        <td> Sem funcionário alocado</td>
+
+                            @foreach($funcionarios as $func)
+                                <tr>
+                                    @if($func->escola_id==$funcionario->escola_id)
+                                        @foreach($categoriaFuncionario as $categ)
+                                            @foreach($escolaClasse as $escola)
+                                           @if($escola->escola_id==$funcionario->escola_id and $escola->funcCateg_id==$func->categoria_funcionario_id and $categ->id==$func->categoria_funcionario_id)
+                                              <td> {{$func->nome}} {{$func->apelido}}</td>
+                                              <td>{{$categ->designacao}}</td>
+                                                @if($func->estado_funcionario==1)
+                                                     <td>Activo(a)</td>
+                                                     @else
+                                                     <td>Inactivo(a)</td>
+                                                @endif
+                                           @endif
+                                              <td>
+                                                <button href="{{url('')}}" class="btn btn-primary ver"> Ver </button>
+                                                <button href="{{url('') }}" class="label label-danger"> Editar </button>
+                                              </td>--
+
+                                    </tr>
+                                    @endforeach
+                                    @endforeach
                                     @endif
-                                    @foreach($categoriaCarta as $categ)
-                                        @if($eC->funcCateg_id==$categ->id and $eC->escola_id==$func->escola_id)
-                                             <td>{{$categ->designacao}}</td>
-                                            @else
-                                            <td> Sem categoria associada</td>
-                                         @endif
-                                    @if($categ->estado==1)
-                                        <td>Activo(a)</td>
-                                    @else
-                                        <td>Inactivo(a)</td>
-                                    @endif
-                                <td>
-                                    <button href="{{url('')}}" class="btn btn-primary ver"> Ver |</button>
-                                    <button href="{{url('') }}" class="label label-danger"> Editar </button></td>
-                            </tr>
-                                @endforeach
-                                @endforeach
-                                @endforeach
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- #END# Basic Examples -->
+                                    @endforeach
+                                    </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- #END# Basic Examples -->
 
 @stop
