@@ -358,7 +358,6 @@
                     contentType: false,
                     cache: false
                 }).done(function (pasta) { //retorna msg
-                    alert(pasta);
                     $('#divAlert').removeClass('d-none');
                     savarFotoCortada(pasta);
                 }).fail(function () {

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\ClasseEscola;
 use App\Contacto;
 use App\Distrito;
+use App\Endereco;
 use App\Escola;
 use Illuminate\Http\Request;
 
@@ -23,20 +24,29 @@ class EscolaController extends Controller{
         $dir = HomeController::clean(($request->nome));//pasta da escola
         $pasta = '/schools/'.$dir;
 
-        mkdir(public_path().$pasta);
-        mkdir(public_path().$pasta.'/inscricoes');
+        if(!is_dir(public_path().'/schools')){
+            mkdir(public_path().'/schools');
+        }
+
+        if(!is_dir(public_path().$pasta)){
+            mkdir(public_path().$pasta);
+        }
+
+        if(!is_dir(public_path().$pasta.'/inscricoes')){
+            mkdir(public_path().$pasta.'/inscricoes');
+        }
 
         $enderecoController = new EnderecoController();
-        $enderecoID = $enderecoController->store2($request); //salva enderecoo e retorna seu id;
+        $endereco = $enderecoController->storeAndReturnId($request); //salva enderecoo e retorna seu id;
 
         $escola = Escola::query()->create(['nome' => $request->nome, 'alvara_nr' => $request->alvara_nr,
             'nuit' => $request->nuit, 'slogan' => $request->slogan,'pasta'=>$dir,'cor_escola'=>$request->cor_escola,
-            'estado' => 1, 'endereco_id' => $enderecoID, 'logo' => 'logo.jpg'
-        ]);
+            'estado' => 1, 'endereco_id' => $endereco, 'logo' => 'logo.jpg'
+        ])->id;
 
         Contacto::query()->create(['nr_telefone'=>$request->nr_telefone,'nr_alternativo'=>$request->nr_alternativo,
             'email'=>$request->email,
-            'escola_id' =>$escola->id
+            'escola_id' =>$escola
         ]);
 
         if (isset($_FILES['inputFoto'])) {

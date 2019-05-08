@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Endereco;
+use App\Escola;
 use Illuminate\Http\Request;
 
 class EnderecoController extends Controller
@@ -37,7 +38,7 @@ class EnderecoController extends Controller
         echo $this->salvar($request)->id;
     }
 
-    public function store2(Request $request){
+    public function storeAndReturnId(Request $request){
         return $this->salvar($request)->id;
     }
 
@@ -49,14 +50,17 @@ class EnderecoController extends Controller
         return $endereco;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Endereco  $endereco
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Endereco $endereco)
-    {
+//    public function salvarEndereco(Request $request){
+//        return new Endereco([
+//            'bairro' => $request->bairro,
+//            'quarteirao' => $request->quarteirao,
+//            'avenida_rua' => $request->avenida_rua,
+//            'nr_casa' => $request->nr_casa,
+//            'distrito_id' => $request->distrito_id
+//        ]);
+//    }
+
+    public function show(Endereco $endereco){
         //
     }
 

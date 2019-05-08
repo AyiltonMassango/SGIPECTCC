@@ -14,8 +14,8 @@
 {{--    <link rel=”stylesheet” href="{{asset('css/sweetalert.css')}}">--}}
 
     <!-- Bootstrap Core Css -->
-    <link rel="stylesheet" href="{{url('https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext')}}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{url('https://fonts.googleapis.com/icon?family=Material+Icons')}}" rel="stylesheet" type="text/css">
+{{--    <link rel="stylesheet" href="{{url('https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext')}}" rel="stylesheet" type="text/css">--}}
+{{--    <link rel="stylesheet" href="{{url('https://fonts.googleapis.com/icon?family=Material+Icons')}}" rel="stylesheet" type="text/css">--}}
 
     <link href="{{asset('plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}" rel="stylesheet" />

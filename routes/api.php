@@ -25,4 +25,3 @@ Route::post('salvarFuncionario','FuncionarioController@storeDirector')->name('sa
 Route::post('salvarEndereco','EnderecoController@store');
 Route::post('salvarAluno','AlunoController@store');
 Route::post('salvarContactAluno','ContactoController@storeAluno');
-

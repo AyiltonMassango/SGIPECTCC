@@ -22,7 +22,7 @@
                                                         </button>
                                                     </legend>
                                                     <div class="row justify-content-center" style="height: 120px;">
-                                                        <img alt="" id="fotoFinal" class="image" src="{{asset('images/backend/person.png')}}" style="height: 100%; border-radius: 5px">
+                                                        <img id="fotoFinal" class="image" src="{{asset('images/backend/person.png')}}" style="height: 100%; border-radius: 5px">
                                                     </div>
                                                 </fieldset>
                                                 <fieldset class="p-l-15" style="border: solid #adadad 1px; border-radius: 5px;  height: 70px">
@@ -42,7 +42,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-float">
                                                         <div class="form-line">
-                                                            <input type="text" name="apelido" id="apelido" class="form-control" >
+                                                            <input type="text" name="apelido" id="apelido" class="form-control" required>
                                                             <label class="form-label" for="apelido">Apelido</label>
                                                         </div>
                                                     </div>
@@ -50,7 +50,7 @@
 
                                                 <div class="col-sm-6 form-group form-float">
                                                     <div class="form-line">
-                                                        <input type="text" id="nome" name="nome" class="form-control">
+                                                        <input type="text" id="nome" name="nome" class="form-control" required>
                                                         <label for="nome" class="form-label">Nome</label>
                                                     </div>
                                                 </div>
@@ -77,7 +77,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group form-float">
                                                         <div class="form-line">
-                                                            <input type="text" id="nacionalidade" name="nacionalidade" class="form-control">
+                                                            <input type="text" id="nacionalidade" name="nacionalidade" class="form-control" required>
                                                             <label for="nacionalidade" class="form-label">Nacionalidade</label>
                                                         </div>
                                                     </div>
@@ -224,7 +224,7 @@
                                     <div class="row" id="divEscolaEnredeco">
                                         <div class="col-sm-4">
                                             <label for="selectProvincia" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Provincia</label>
-                                            <select title="" id="selectProvincia" class="form-control-file" data-size="8" style="width: 100%;" data-live-search="true">
+                                            <select title="" id="selectProvincia" class="form-control-file" data-size="8" style="width: 100%;">
                                                 @foreach($provincias as $pro)
                                                     <option id="{{$pro->id}}" value="{{$pro->id}}">{{$pro->designacao}}</option>
                                                 @endforeach
@@ -232,7 +232,7 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <label for="selectDistrito" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Distrito</label>
-                                            <select name="distrito_id" title="" class="form-control-file" id="selectDistrito" data-size="8" data-live-search="true">
+                                            <select name="distrito_id" title="" class="form-control-file" id="selectDistrito" data-size="8">
                                             </select>
                                             {{--<input name="distrito_id" id="distrito_id" type="hidden">--}}
                                         </div>
@@ -281,7 +281,7 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <label for="selectCategoria" class="mb-0 mt-0" style="font-size: 12px; color: #87939a">Categoria/Classe</label>
-                                            <select name="categoria_carta_id" class="form-control-file" id="selectCategoria" data-size="8" data-live-search="true">
+                                            <select name="categoria_carta_id" class="form-control-file" id="selectCategoria" data-size="8">
                                                 @foreach($categorias as $cat)
                                                     <option id="{{$cat->preco}}" value="{{$cat->id}}">{{$cat->designacao}}</option>
                                                 @endforeach

@@ -6,7 +6,7 @@
             <div class="card mb-2">
                 <div class="card-header pt-3 pb-0">
                     <h6 class="card-title">
-                        <i class="fa fa-pencil"></i>&nbsp;Registar Categorias das Cartas
+                        <i class="fa fa-pencil"></i>&nbsp;Resgistar Categorias das Cartas
                     </h6>
                 </div>
                 <div class="body mb-0">

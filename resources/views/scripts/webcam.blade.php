@@ -11,7 +11,7 @@
                 backdrop: "static"
             });
             navigator.getUserMedia({video: true}, function (stream) {
-                video.src = window.URL.createObjectURL(stream);
+				video.srcObject = stream;
                 localMediaStream = stream;
             }, function (error) {
                 console.log('error pic', error)
@@ -24,6 +24,10 @@
                 document.getElementById('imgem').src = canvas.toDataURL('image/png');
                 document.getElementById('fotoFinal').src = canvas.toDataURL('image/png'); //poe a foto do noivo
             }
+        });
+
+        $('#modal-Web').on('hidden.bs.modal',function () {
+            localMediaStream.getTracks()[0].stop();
         });
     });
 </script>

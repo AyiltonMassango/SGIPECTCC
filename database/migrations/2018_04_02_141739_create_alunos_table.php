@@ -25,7 +25,6 @@ class CreateAlunosTable extends Migration
             $table->string('profissao');
             $table->string('local_trabalho');
             $table->string('nivel_academico');
-            $table->string('email');
             $table->string('nome_pai');
             $table->string('nome_mae');
             $table->integer('endereco_id')->unsigned();

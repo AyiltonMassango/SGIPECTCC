@@ -40,7 +40,7 @@
             <li id="li_ecola">
                 <a id="a_escola" href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">account_balance</i>
-                    <span>Escolas de Condução</span>
+                    <span>Escolas</span>
                 </a>
                 <ul class="ml-menu">
                     <li id="a_add_escola">
@@ -53,11 +53,6 @@
                         <a href="{{url('')}}">
                             <i class="material-icons">list</i>
                             <span>Listar</span>
-                        </a>
-                    </li><li id="a_list_escola">
-                        <a href="{{url('/classeEscola')}}">
-                            <i class="material-icons">add</i>
-                            <span>Associar Categoria de Carta à Escola</span>
                         </a>
                     </li>
                 </ul>

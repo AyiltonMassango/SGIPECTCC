@@ -40,7 +40,8 @@ class InscricaoController extends Controller{
 
     public function store(Request $request){
 
-        $aluno = AlunoController::store($request);
+//        $aluno = AlunoController::store($request);
+        $aluno = Aluno::query()->find(1);
         $escola = HomeController::getFuncionarioActivo();
 
         if($request->total_a_pagar == $request->valor_pagar){ //se pagar todo_valor
@@ -49,13 +50,17 @@ class InscricaoController extends Controller{
             $estado_payment = 0;
         }
 
-        $pastaInscricao = '/schools/'. $escola->pasta.'/inscricoes/'.date('Y'); //pasta um
-        if(is_dir(public_path().$pastaInscricao)){ //verifica se ja existe uma pasta
-            mkdir(public_path().$pastaInscricao.'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido)); //com nomes do aluno
-        }else{
-            mkdir(public_path().$pastaInscricao); //se nao...cria uma
-            mkdir(public_path().$pastaInscricao.'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido)); //com nomes do aluno
+        if(!is_dir(public_path().'/schools/' .$escola->pasta)){
+            mkdir(public_path().'/schools/'. $escola->pasta);
         }
+
+        if(!is_dir(public_path().'/schools/' .$escola->pasta.'/inscricoes/')){
+            mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/');
+            mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y'));
+            mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y').'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido)); //com nomes do aluno
+
+        }
+        $pastaInscricao = '/schools/'. $escola->pasta.'/inscricoes/'.date('Y'); //pasta um
 
         $inscricao = Inscricao::query()->create([
             'nr_ficha'=> date('YmdHis'),
@@ -64,10 +69,14 @@ class InscricaoController extends Controller{
             'total_a_pagar'=>$request->total_a_pagar,
             'tipo_aulas'=>$request->tipo_aulas,
             'categoria_carta_id'=>$request->categoria_carta_id,
+            'funcionario_id'=>$escola->func_id,
             'aluno_id'=>$aluno->id,
             'escola_id'=>$escola->escola_id,
             'estado_pagamento'=>$estado_payment,
-            'pasta'=>$pastaInscricao.'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido)
+            'pasta'=>$pastaInscricao.'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido),
+            'nr_carta'=>date('YmdHis'),
+            'historico'=>'por vir',
+            'codigo_barras'=>date('YmdHis'),
         ]);
 
         if($request->tipo_pagamento == 'deposito'){

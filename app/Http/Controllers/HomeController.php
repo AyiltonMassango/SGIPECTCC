@@ -31,7 +31,6 @@ class HomeController extends Controller{
     }
 
     public function write_theme(){
-
         $file = fopen(public_path().'/theme.txt','w+');
         fwrite($file,$_POST['theme']);
         fclose($file);

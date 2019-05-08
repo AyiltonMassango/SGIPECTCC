@@ -16,4 +16,8 @@ class Escola extends Model{
     public function getInscricoes(){
         return $this->hasMany(Inscricao::class,'escola_id');
     }
+
+    public function endereco(){
+        return $this->belongsTo(Endereco::class,'endereco_id');
+    }
 }

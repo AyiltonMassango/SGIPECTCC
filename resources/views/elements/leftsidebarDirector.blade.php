@@ -85,7 +85,7 @@
                         </a>
                     </li>
                     <li>
-                        <a id="a_list_funcinari" href="{{url('funcEscola')}}">
+                        <a id="a_list_funcinari" href="{{url('funcionario')}}">
                             <i class="material-icons">list</i>
                             <span>Listar</span>
                         </a>

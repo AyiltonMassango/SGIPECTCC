@@ -50,7 +50,7 @@ class FuncionarioController extends Controller
      */
     public function store(Request $request){
         $endecoController = new EnderecoController();
-        $endereco = $endecoController->store2($request);
+        $endereco = $endecoController->storeAndReturnId($request);
 
         $tipoDocumentoController = new TipoDocumentoController();
         $tipoDoc = $tipoDocumentoController->store($request)->id;
@@ -73,7 +73,7 @@ class FuncionarioController extends Controller
             'estado_funcionario'=>1,
             'user_id'=>$user->id
         ]);
-        FuncCategoriaEscola::create(['escola_id'=>$request->escola_id, 'funcCateg_id'=>$request->categoria_funcionario_id, 'estado'=>1]);
+//        FuncCategoriaEscola::query()->create(['escola_id'=>$request->escola_id, 'funcCateg_id'=>$request->categoria_funcionario_id, 'estado'=>1]);
         Contacto::query()->create(['nr_telefone'=>$request->nr_telefone,'nr_alternativo'=>$request->nr_alternativo,
             'funcionario_id' =>$funcionario->id
         ]);
