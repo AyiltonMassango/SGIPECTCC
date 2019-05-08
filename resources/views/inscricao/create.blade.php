@@ -5,7 +5,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="body pb-0">
-                    <form id="wizard_with_validation" autocomplete="off" method="POST">
+                    <form id="wizard_with_validation" autocomplete="off" method="POST" action="{{url('/salvarInscricao')}}">
                         @csrf
                         {{--<div id="wizard_horizontal">--}}
                             <h3>Dados Pessoais</h3>
@@ -431,9 +431,43 @@
 @endsection
 
 @section('script')
-    @include('scripts.webcam')
+{{--    @include('scripts.webcam')--}}
     <script>
         $(document).ready(function () {
+
+            var video = document.getElementById('video');
+            var canvas = document.getElementById('cv');
+            var ctx = canvas.getContext('2d');
+            var localMediaStream = null;
+
+            $('#btn-webCam').click(function () {
+                $('#modal-Web').modal({
+                    show: true,
+                    backdrop: "static"
+                });
+                navigator.getUserMedia({video: true}, function (stream) {
+                    video.srcObject = stream;
+                    localMediaStream = stream;
+                }, function (error) {
+                    console.log('error pic', error)
+                });
+            });
+
+            var imagem;
+            $('#btnTakePhoto').click(function () {
+                if (localMediaStream) {
+                    ctx.drawImage(video, 0, 0, 300, 250);
+                    document.getElementById('imgem').src = canvas.toDataURL('image/png');
+                    document.getElementById('fotoFinal').src = canvas.toDataURL('image/png'); //poe a foto do noivo
+                    imagem = canvas.toDataURL('image/png');
+                }
+            });
+
+            $('#modal-Web').on('hidden.bs.modal',function () {
+                localMediaStream.getTracks()[0].stop();
+            });
+
+
             $('.data').bootstrapMaterialDatePicker({
                 weekStart:0, time: false
             });
@@ -473,20 +507,20 @@
             });
             $('#selectCategoria').val($('#selectCategoria').val()).trigger('change');
 
-            function salvarPhoto(data) {
-                imagem = document.getElementById('fotoFinal').src;
-                $.ajax({
-                    url: "/salvarPhoto",
-                    type: 'POST',
-                    data: {'img': imagem,'inscricaoID':data},
-                    success:function () {
-                        $('#wizard_with_validation').trigger('reset');
-                        $('#a_streamPDF')[0].click();
-                    },error: function () {
-                        alert('Erro ao salvar Foto');
-                    }
-                });
-            }
+            // function salvarPhoto(data) {
+            //     imagem = document.getElementById('fotoFinal').src;
+            //     $.ajax({
+            //         url: "/salvarPhoto",
+            //         type: 'POST',
+            //         data: {'img': imagem,'inscricaoID':data},
+            //         success:function () {
+            //             $('#wizard_with_validation').trigger('reset');
+            //             $('#a_streamPDF')[0].click();
+            //         },error: function () {
+            //             alert('Erro ao salvar Foto');
+            //         }
+            //     });
+            // }
 
             $('#percentagem_desconto').on('input',function () { //acao de input de desconto
                 valor_desconto = $(this).val();
@@ -510,16 +544,19 @@
 
             $('#wizard_with_validation').submit(function (e) {
                 e.preventDefault();
+
+                var dados = new FormData(this);
+                dados.append("img", imagem);
+
                 $.ajax({
                     url: '/salvarInscricao',
                     type: 'POST',
-                    data: new FormData(this),
+                    data: dados,
                     processData: false,
                     contentType: false,
                     cache: false,
                     success: function (data) {
                         $('#btnSuccess').trigger('click');
-                        salvarPhoto(data);
                     },
                     error: function () {
                         alert('Erro ao salvar Inscricao');

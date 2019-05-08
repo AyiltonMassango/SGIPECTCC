@@ -14,18 +14,16 @@ class CamposAdicionais extends Migration
     public function up()
     {
 //        Schema::table('pagamentos', function (Blueprint $table) {
-//            $table->date('data_deposito')
-//                ->nullable()
-//                ->after('recibo_nr');
+//            $table->date('data_deposito')->nullable()->after('recibo_nr');
 //            $table->string('tipo_pagamento');
 //            $table->string('nome_balcao')
 //                ->nullable();
 //            //
 //        });
-
-        Schema::table('inscricaos',function (Blueprint $table){
-           $table->longText('pasta')->after('historico');
-        });
+//
+//        Schema::table('inscricaos',function (Blueprint $table){
+//           $table->longText('pasta')->after('historico');
+//        });
     }
 
     /**
@@ -39,7 +37,7 @@ class CamposAdicionais extends Migration
 //            $table->dropColumn('data_deposito');
 //            $table->dropColumn('tipo_pagamento');
 //            $table->dropColumn('nome_balcao');
-//            //
+            //
 //        });
     }
 }

@@ -40,8 +40,7 @@ class InscricaoController extends Controller{
 
     public function store(Request $request){
 
-//        $aluno = AlunoController::store($request);
-        $aluno = Aluno::query()->find(1);
+        $aluno = AlunoController::store($request);
         $escola = HomeController::getFuncionarioActivo();
 
         if($request->total_a_pagar == $request->valor_pagar){ //se pagar todo_valor
@@ -50,17 +49,26 @@ class InscricaoController extends Controller{
             $estado_payment = 0;
         }
 
+        if(!is_dir(public_path().'/schools')){
+            mkdir(public_path().'/schools');
+        }
+
         if(!is_dir(public_path().'/schools/' .$escola->pasta)){
             mkdir(public_path().'/schools/'. $escola->pasta);
         }
 
         if(!is_dir(public_path().'/schools/' .$escola->pasta.'/inscricoes/')){
             mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/');
-            mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y'));
-            mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y').'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido)); //com nomes do aluno
-
         }
-        $pastaInscricao = '/schools/'. $escola->pasta.'/inscricoes/'.date('Y'); //pasta um
+
+        if(!is_dir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y'))){
+            mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y'));
+        }
+
+        if(!is_dir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y').'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido))){
+            mkdir(public_path().'/schools/'. $escola->pasta.'/inscricoes/'.date('Y').'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido)); //com nomes do aluno
+        }
+        $pastaInscricao = '/schools/'. $escola->pasta.'/inscricoes/'.date('Y').'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido); //pasta um
 
         $inscricao = Inscricao::query()->create([
             'nr_ficha'=> date('YmdHis'),
@@ -73,7 +81,7 @@ class InscricaoController extends Controller{
             'aluno_id'=>$aluno->id,
             'escola_id'=>$escola->escola_id,
             'estado_pagamento'=>$estado_payment,
-            'pasta'=>$pastaInscricao.'/'.HomeController::clean($aluno->nome.' '.$aluno->apelido),
+            'pasta'=>$pastaInscricao,
             'nr_carta'=>date('YmdHis'),
             'historico'=>'por vir',
             'codigo_barras'=>date('YmdHis'),
@@ -90,7 +98,10 @@ class InscricaoController extends Controller{
             ]);
         }
 
-        echo $inscricao->id;
+        $imagem = substr($request->img, strpos($request->img,",")+1);
+        $decode = base64_decode($imagem);
+        $fp = fopen(public_path().$pastaInscricao.'/foto.jpg','wb');
+        fwrite($fp, $decode);
     }
 
     public function export_Frente($idAluno){

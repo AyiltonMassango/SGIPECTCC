@@ -14,11 +14,13 @@ class Inscricao extends Model{
         'tipo_aulas',
         'categoria_carta_id',
         'aluno_id',
+        'funcionario_id',
         'escola_id',
         'estado_pagamento',
         'pasta',
         'nr_carta',
-        'historico'
+        'historico',
+        'codigo_barras',
     ];
 
     public function getAluno(){
