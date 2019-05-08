@@ -543,25 +543,25 @@
             });
 
             $('#wizard_with_validation').submit(function (e) {
-                // e.preventDefault();
+                e.preventDefault();
 
-                // var dados = new FormData(this);
-                // dados.append("img", imagem);
-                //
-                // $.ajax({
-                //     url: '/salvarInscricao',
-                //     type: 'POST',
-                //     data: dados,
-                //     processData: false,
-                //     contentType: false,
-                //     cache: false,
-                //     success: function (data) {
-                //         $('#btnSuccess').trigger('click');
-                //     },
-                //     error: function () {
-                //         alert('Erro ao salvar Inscricao');
-                //     }
-                // })
+                var dados = new FormData(this);
+                dados.append("img", imagem);
+
+                $.ajax({
+                    url: '/salvarInscricao',
+                    type: 'POST',
+                    data: dados,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        $('#btnSuccess').trigger('click');
+                    },
+                    error: function () {
+                        alert('Erro ao salvar Inscricao');
+                    }
+                })
             });
         })
     </script>
