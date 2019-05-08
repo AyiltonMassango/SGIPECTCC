@@ -1,5 +1,5 @@
 <div style="margin-bottom: 1px">
-    <img style="width: 30%; display: inline-block" src="{{public_path().'/schools/'.$escola->pasta.'/'.$escola->logo}}" height="100">
+{{--    <img style="width: 30%; display: inline-block" src="{{public_path().'/schools/'.$escola->pasta.'/'.$escola->logo}}" height="100">--}}
     <div style="width: 40%; display: inline-block">
         <h6 class="txt-center p-m"><strong>{{$enderecoEscola->avenida_rua.', '.$enderecoEscola->nr_casa.'-'.$provinciaEscola}}</strong></h6>
         <h6 class="txt-center p-m">Tell:&nbsp;<strong>{{$contactoEscola->nr_telefone.' || '.$contactoEscola->nr_alternativo}}</strong></h6>
@@ -8,7 +8,7 @@
         <h6 class="txt-center p-m"><strong>{{$provinciaEscola}}-Moçambique</strong></h6>
     </div>
     <div style="width: 24%; display: inline-block; padding-left: 15px">
-        <img src="{{public_path().$inscricao->pasta.'/'.$inscricao->foto_aluno}}" height="100">
+{{--        <img src="{{public_path().$inscricao->pasta.'/foto.jpg'}}" height="100">--}}
     </div>
 </div>
 <div class="linha3">

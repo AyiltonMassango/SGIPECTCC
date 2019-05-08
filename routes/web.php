@@ -63,3 +63,5 @@ Route::get('/streamPDF','InscricaoController@streamPDF')->name('streamPDF');
 
 Route::get('/teste', function (){
 });
+
+//Route::get('/pdf')

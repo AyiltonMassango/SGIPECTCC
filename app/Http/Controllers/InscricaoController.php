@@ -139,7 +139,6 @@ class InscricaoController extends Controller{
 
     public function salvarPhoto(){
         $inscricao = Inscricao::query()->find($_POST['inscricaoID']);
-
         $imagem = substr($_POST['img'], strpos($_POST['img'],",")+1);
         $decode = base64_decode($imagem);
         $fp = fopen(public_path().$inscricao->pasta.'/foto.jpg','wb');
